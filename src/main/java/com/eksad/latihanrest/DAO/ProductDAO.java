@@ -22,8 +22,7 @@ public interface ProductDAO extends CrudRepository<Product, Long>
 	
 	public List<Product> findByName(String name);
 	
-	@Query("select b from Brand b where name = :search")
-	public List<Product> findBySearch(@Param("search") String search);
+
 
 	
 	

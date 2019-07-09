@@ -79,12 +79,5 @@ public class ProductController {
 		return result;
 		
 	}
-	@RequestMapping("getName/{search}")
-	public List<Product> getName(@PathVariable String search) {
-		List<Product> product = new ArrayList<Product>();
-			productDAO.findBySearch(search);
-		
-		return product;
-	}
-	
+
 }
