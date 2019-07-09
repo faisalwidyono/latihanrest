@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import com.eksad.latihanrest.model.Brand;
 import com.eksad.latihanrest.model.Product;
 
 
@@ -17,6 +19,15 @@ public interface ProductDAO extends CrudRepository<Product, Long>
 	 */
 	@Query("select p from Product p where p.brand.id = :brandId")
 	public Iterable<Product> findByBrandId(@Param("brandId") Long brandId);
+	
+	public List<Product> findByName(String name);
+	
+	@Query("select b from Brand b where name = :search")
+	public List<Product> findBySearch(@Param("search") String search);
+
+	
+	
+	
 	
 	
 	

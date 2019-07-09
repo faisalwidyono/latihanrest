@@ -1,9 +1,9 @@
 package com.eksad.latihanrest.DAO;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.eksad.latihanrest.model.Person;
 
-public interface PersonDAO extends CrudRepository<Person, Long>{
+public interface PersonDAO extends PagingAndSortingRepository<Person, Long>{
 
 }

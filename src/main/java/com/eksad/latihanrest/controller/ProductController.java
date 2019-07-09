@@ -1,6 +1,7 @@
 package com.eksad.latihanrest.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,47 @@ public class ProductController {
 		return null;
 		
 	}
+	
+	@RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
+	public Product update(@RequestBody Product product, @PathVariable Long id) {
+		
+		Product productSelected = productDAO.findById(id).orElse(null);
+		
+		if (productSelected !=null) {
+			productSelected.setName(product.getName());
+			productSelected.setBrand_id(product.getBrand_id());
+			productSelected.setPrice(product.getPrice());
+			productSelected.setBrand(product.getBrand());
+			
+			
+			return productDAO.save(productSelected);
+		}else {
+			return null;
+		}
+	}
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	public HashMap<String, Object> delete (@PathVariable Long id){
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		productDAO.deleteById(id);
+		result.put("message", "Berhasil Dihapus");
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "getByName/{name}", method = RequestMethod.GET)
+	public List<Product> getByName(@PathVariable String name) {
+		List<Product> result = new ArrayList<Product>();
+		productDAO.findByName(name).forEach(result::add);
+		
+		return result;
+		
+	}
+	@RequestMapping("getName/{search}")
+	public List<Product> getName(@PathVariable String search) {
+		List<Product> product = new ArrayList<Product>();
+			productDAO.findBySearch(search);
+		
+		return product;
+	}
+	
 }
